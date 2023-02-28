@@ -41,10 +41,11 @@ else {
     let pointPlay = 0;
     let pointComp = 0;  
     for (let i = 0; i < 5; i++) {
-      const playerSelection = prompt("Please enter your choice: Rock, Paper or Scissors:");
+      const playerSelection2 = prompt("Please enter your choice: Rock, Paper or Scissors:").toLowerCase();
+      const playerSelection = playerSelection2.charAt(0).toUpperCase() + playerSelection2.slice(1);
       const computerSelection = getComputerChoice();
       let won = playRound(playerSelection, computerSelection);
-      console.log("Player selection: " + playerSelection + " Computer selection: " + computerSelection);
+      console.log("Player selection: " + playerSelection + ", Computer selection: " + computerSelection);
 
       switch (won) {
         case "Tie":
