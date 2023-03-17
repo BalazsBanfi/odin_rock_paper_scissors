@@ -45,24 +45,24 @@ buttons.forEach((butt) => {
     winner = playRound(playerSelection, computerSelection);
     if (winner == "player") {
       pointPlayer++;
-      divResult.textContent = 'Player won';
+      divResult.innerHTML = "Player won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
     }
     if (winner == "computer") {
       pointComputer++;
-      divResult.textContent = 'Computer won';
+      divResult.innerHTML = "Computer won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
     }
     
     if (winner == "tie") {
-      divResult.textContent = 'Tie';
+      divResult.innerHTML = "Tie! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
     }
 
-    if (pointPlayer === 10) {
-      divResult.textContent = 'The winner is the Player!';
+    if (pointPlayer === 5) {
+      divResult.innerHTML = "The winner is the Player! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
       pointComputer = 0;
       pointPlayer = 0;
     }
-    if (pointComputer === 10) {
-      divResult.textContent = 'The winner is the Player!';
+    if (pointComputer === 5) {
+      divResult.innerHTML = "The winner is the Computer! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
       pointComputer = 0;
       pointPlayer = 0;
     }
