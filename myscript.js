@@ -1,3 +1,10 @@
+let pointPlayer = 0;
+let pointComputer = 0;
+let playerSelection = "";
+let computerSelection = "";
+let won = "";
+
+// The computer choose random
 function getComputerChoice() {
     let choice = "";
     switch (Math.floor(Math.random() * 3)) {
@@ -9,70 +16,52 @@ function getComputerChoice() {
           break;
         case 2:
           choice = "Scissors";
-      }
-    
+    }
     return choice;
 }
 
 
+// One round player vs computer
 function playRound(playerSelection, computerSelection) {
-    // your code here!
-    if ((playerSelection === "Rock") || (playerSelection === "Paper") || (playerSelection === "Scissors")) {
-        
-      if (playerSelection === computerSelection) {
-        return "Tie";
-      }
-      if ((playerSelection === "Rock" && computerSelection === "Scissors") ||
-        (playerSelection === "Paper" && computerSelection === "Rock") ||
-        (playerSelection === "Scissors" && computerSelection === "Paper")) {
-          return "player";
-      }
-      else {
-        return "comp";
-      }
+    if (playerSelection === computerSelection) {
+      return "tie";
     }
-else {
-    return "Not";
-}
-}
-
- 
-  function game() {
-    let pointPlay = 0;
-    let pointComp = 0;  
-    for (let i = 0; i < 5; i++) {
-      const playerSelection2 = prompt("Please enter your choice: Rock, Paper or Scissors:").toLowerCase();
-      const playerSelection = playerSelection2.charAt(0).toUpperCase() + playerSelection2.slice(1);
-      const computerSelection = getComputerChoice();
-      let won = playRound(playerSelection, computerSelection);
-      console.log("Player selection: " + playerSelection + ", Computer selection: " + computerSelection);
-
-      switch (won) {
-        case "Tie":
-          console.log("Tie! New turn!");
-          i--;
-          break;          
-        case "Not":
-          console.log("Not valid! Choose only Rock, Paper or Scissors! New turn!");
-          i--;
-          break;
-        case "player":
-          console.log("You won! " + playerSelection + " beats " + computerSelection);
-          pointPlay += 1;
-          break;
-        case "comp":
-          console.log("You lose! " + computerSelection + " beats " + playerSelection);
-          pointComp += 1;
-          break;
-      }
-      console.log("Round: " + (i+1) + ". Player points: " + pointPlay + " Computer points: " + pointComp);
-    }
-    if (pointPlay > pointComp) {
-      return ("The winner is You! Player: " + pointPlay + ". Computer: " + pointComp);
+    if ((playerSelection === "Rock" && computerSelection === "Scissors") ||
+      (playerSelection === "Paper" && computerSelection === "Rock") ||
+      (playerSelection === "Scissors" && computerSelection === "Paper")) {
+        return "player";
     }
     else {
-      return ("The winner is the Computer: " + pointComp + ". Player: " + pointPlay);
+      return "computer";
     }
-  }
+}
 
-  let winner = console.log(game());
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((butt) => {
+    butt.addEventListener('click', () => {
+        computerSelection = getComputerChoice();
+        playerSelection = butt.value;
+        winner = playRound(playerSelection, computerSelection);
+        if (winner == "player") {
+            pointPlayer++;
+        }
+        if (winner == "computer") {
+            pointComputer++;
+        }
+
+        console.log("Player: ", pointPlayer, " Computer: ", pointComputer);            
+
+        if (pointPlayer === 10) {
+            console.log("The winner is the Player, player points: ", pointPlayer, ", computer points: ", pointComputer);
+            pointComputer = 0;
+            pointPlayer = 0;
+        }
+        if (pointComputer === 10) {
+            console.log("The winner is the Computer, computer points: ", pointComputer, ", player points: ", pointPlayer);
+            pointComputer = 0;
+            pointPlayer = 0;
+        }
+    })
+});
