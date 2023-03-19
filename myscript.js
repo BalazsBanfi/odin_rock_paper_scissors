@@ -3,6 +3,7 @@ let pointComputer = 0;
 let playerSelection = "";
 let computerSelection = "";
 const divResult = document.querySelector('#result');
+let resultText = "";
 
 // The computer choose random
 function getComputerChoice() {
@@ -19,7 +20,6 @@ function getComputerChoice() {
   }
   return choice;
 }
-
 
 // One round player vs computer
 function playRound(playerSelection, computerSelection) {
@@ -40,29 +40,42 @@ const buttons = document.querySelectorAll('button');
 
 buttons.forEach((butt) => {
   butt.addEventListener('click', () => {
+    if (pointPlayer === 0 && pointComputer === 0) {
+      divResult.innerHTML = "";
+    }
     computerSelection = getComputerChoice();
     playerSelection = butt.value;
     winner = playRound(playerSelection, computerSelection);
     if (winner == "player") {
       pointPlayer++;
-      divResult.innerHTML = "Player won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText = document.createElement('p');
+      resultText.innerHTML = "Player: " + playerSelection + " beats Computer: " + computerSelection + ". Player won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      divResult.appendChild(resultText);
     }
     if (winner == "computer") {
       pointComputer++;
-      divResult.innerHTML = "Computer won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText = document.createElement('p');
+      resultText.innerHTML = "Computer: " + computerSelection + " beats Player: " + playerSelection + ". Computer won! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      divResult.appendChild(resultText);
     }
     
     if (winner == "tie") {
-      divResult.innerHTML = "Tie! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText = document.createElement('p');
+      resultText.innerHTML = "Player and Computer: " + playerSelection + ". Tie! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      divResult.appendChild(resultText);
     }
 
     if (pointPlayer === 5) {
-      divResult.innerHTML = "The winner is the Player! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText = document.createElement('p');
+      resultText.innerHTML = "The winner is the Player! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      divResult.appendChild(resultText);
       pointComputer = 0;
       pointPlayer = 0;
     }
     if (pointComputer === 5) {
-      divResult.innerHTML = "The winner is the Computer! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText = document.createElement('p');
+      resultText.innerHTML = "The winner is the Computer! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      divResult.appendChild(resultText);
       pointComputer = 0;
       pointPlayer = 0;
     }
