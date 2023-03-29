@@ -68,6 +68,7 @@ buttons.forEach((butt) => {
     if (pointPlayer === 5) {
       resultText = document.createElement('p');
       resultText.innerHTML = "The winner is the Player! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText.style.color = "red";
       divResult.appendChild(resultText);
       pointComputer = 0;
       pointPlayer = 0;
@@ -75,6 +76,7 @@ buttons.forEach((butt) => {
     if (pointComputer === 5) {
       resultText = document.createElement('p');
       resultText.innerHTML = "The winner is the Computer! Player points: " + pointPlayer + ", Computer points: " + pointComputer;
+      resultText.style.color = "red";
       divResult.appendChild(resultText);
       pointComputer = 0;
       pointPlayer = 0;
